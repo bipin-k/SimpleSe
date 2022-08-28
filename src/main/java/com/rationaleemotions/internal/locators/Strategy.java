@@ -1,5 +1,6 @@
 package com.rationaleemotions.internal.locators;
 
+import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ByIdOrName;
 
@@ -134,7 +135,7 @@ public enum Strategy implements StrategyTraits {
         @Override
         public boolean typeMatches(String locator) {
             return Strategy.isNotNullAndEmpty(locator) &&
-                    !locator.matches("(xpath|css|class|linkText|partialLinkText|tagName).*");
+                    !locator.matches("(xpath|css|class|linkText|partialLinkText|tagName|accessibility).*");
         }
 
         @Override
@@ -146,12 +147,30 @@ public enum Strategy implements StrategyTraits {
         public String locatorType() {
             return null;
         }
+    },
+    ACCESSIBILITY_ID {
+        @Override
+        public boolean typeMatches(String locator) {
+            return Strategy.isNotNullAndEmpty(locator) &&
+                Strategy.matches(locator, locatorType());
+        }
+
+        @Override
+        public By getStrategy(String locator) {
+            String value = Strategy.extractLocator(locator, locatorType());
+            return AppiumBy.accessibilityId(value);
+        }
+
+        @Override
+        public String locatorType() {
+            return "accessibility";
+        }
     };
 
     private static final String DEFAULT_REGEXP_PATTERN_XPATH_IDENTIFIER = "^(/|//|./|.//).*$";
 
     private static boolean isNotNullAndEmpty(String locator) {
-        return locator != null && ! locator.trim().isEmpty();
+        return locator != null && !locator.trim().isEmpty();
     }
 
     private static boolean matches(String locator, String type) {
