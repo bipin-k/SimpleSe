@@ -42,7 +42,21 @@
       "locale": [
         {
           "name": "en_US",
-          "locator": ".//a[@class = 'nav-a  '][%s]"
+          "locator": ".//a[@class = 'nav-a  '][6]"
+        }
+      ],
+      "wait": {
+        "until": "visible",
+        "for": 10
+      }
+    },
+    {
+      "name": "amazon1",
+      "locale": [
+        {
+          "name": "en_US",
+          "locator": ".//a[@class = 'nav-a  '][%s]",
+          "isDynamic": true
         }
       ],
       "wait": {

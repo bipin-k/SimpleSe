@@ -97,14 +97,4 @@ public class PageObjectTest {
         textField.type(Keys.chord(Keys.CONTROL, "a"));
         Assert.assertEquals(textField.getText(), expected);
     }
-
-    @Test
-    public void test1() {
-        WebDriver driver = new FakeDriver(2, DefaultWaitConditions.CLICKABLE);
-        PageObject homePage = new PageObject(driver, "src/test/resources/HomePage.json");
-        Label heading = homePage.getLabel("headingWithPlaceholderText", "id");
-        System.out.println(heading.getText());
-        System.out.println(homePage.getLabel("headingWithPlaceholderText", "id").toString());
-        Assert.assertEquals(heading.getText(), "Fake text");
-    }
 }

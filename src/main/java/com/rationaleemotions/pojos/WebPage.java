@@ -25,7 +25,7 @@ public final class WebPage {
         File file = new File(fileName);
         Preconditions.checkArgument(file.exists(), "Cannot find file : " + file.getAbsolutePath());
         WebPage page = PageStore.getPage(FilenameUtils.getBaseName(fileName));
-        if (page != null) {
+        if (page != null && args.length == 0) {
             return page;
         }
         try {

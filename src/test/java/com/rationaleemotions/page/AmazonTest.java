@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class AmazonTest {
     @Test
@@ -22,9 +23,20 @@ public class AmazonTest {
         driver.get("https://www.amazon.in/");
 
         PageObject homePage = new PageObject(driver, "src/test/resources/HomePage.json");
-        TextField textField = homePage.getTextField("amazon", 6);
 
+
+
+        TextField textField1 = homePage.getTextField("amazon");
+        System.out.println(textField1.getText());
+
+        TextField textField = homePage.getTextField("amazon1", 3);
         System.out.println(textField.getText());
+
+        try {
+            TimeUnit.MILLISECONDS.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         driver.close();
         driver.quit();
