@@ -292,22 +292,11 @@ public final class PageObject {
             throw new IllegalArgumentException("A field name cannot be null (or) empty");
         }
 
-
         initLazily(fieldName, args);
         JsonWebElement element = page.getWebElement(fieldName);
-        if (element.isDynamic()) {
-            JsonWebElement webElement = page.getWebElement(fieldName);
-
-//            element.getLocationStrategy()
-
-            element.getLocales().forEach(System.out::println);
-
-            for (Locale locale1 : element.getLocales()) {
-                locale1.setLocator(String.format(locale1.getLocator(), args));
-            }
-
-
-        }
+//        if (element.isDynamic()) {
+//            JsonWebElement webElement = page.getWebElement(fieldName);
+//        }
         if (element == null) {
             throw new IllegalArgumentException("Unable to locate element [" + fieldName +
                     "] in the file [" + this.jsonFileSource + "]");

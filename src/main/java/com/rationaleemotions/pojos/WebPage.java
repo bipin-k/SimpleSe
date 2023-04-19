@@ -25,21 +25,22 @@ public final class WebPage {
         File file = new File(fileName);
         Preconditions.checkArgument(file.exists(), "Cannot find file : " + file.getAbsolutePath());
         WebPage page = PageStore.getPage(FilenameUtils.getBaseName(fileName));
-        if (page != null && args.length == 0) {
+        if (page != null &&args.length == 0) {
             return page;
         }
         try {
             PageElement pageElement = PageParser.parsePage(fileName);
 
             page = new WebPage();
-            page.name = pageElement.getName();
-            page.defaultLocale = pageElement.getDefaultLocale();
+
             for (Element each : pageElement.getElements()) {
 
 //                if (!fieldName.equalsIgnoreCase(each.getName())) {
 //                    return page;
 //                }
 
+                page.name = pageElement.getName();
+                page.defaultLocale = pageElement.getDefaultLocale();
 
                 JsonWebElement element = JsonWebElement.newElement(each, page.defaultLocale, fieldName, args);
                 page.elements.put(element.getName(), element);

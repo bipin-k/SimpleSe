@@ -102,6 +102,7 @@ public final class JsonWebElement {
         element.validate();
         JsonWebElement jsonWebElement = new JsonWebElement();
         jsonWebElement.name = element.getName();
+        jsonWebElement.isDynamic = element.isDynamic();
 
         // Apply string formatting for the provided arguments on string placeholder
         List<Locale> locales = element.getLocales();
