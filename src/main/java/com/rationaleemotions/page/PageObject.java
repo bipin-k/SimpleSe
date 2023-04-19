@@ -55,48 +55,48 @@ public final class PageObject {
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - A {@link Button} instance.
      */
-    public final Button getButton(String fieldName, Object... args) {
-        return getElement(fieldName, Button.class, args);
+    public final Button getButton(String fieldName) {
+        return getElement(fieldName, Button.class);
     }
 
     /**
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - A {@link List} of {@link Button} instances.
      */
-    public final List<Button> getButtons(String fieldName, Object... args) {
-        return getElements(fieldName, Button.class, args);
+    public final List<Button> getButtons(String fieldName) {
+        return getElements(fieldName, Button.class);
     }
 
     /**
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - A {@link Checkbox} instance.
      */
-    public final Checkbox getCheckbox(String fieldName, Object... args) {
-        return getElement(fieldName, Checkbox.class, args);
+    public final Checkbox getCheckbox(String fieldName) {
+        return getElement(fieldName, Checkbox.class);
     }
 
     /**
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - A {@link List} of {@link Checkbox} instances.
      */
-    public final List<Checkbox> getCheckboxes(String fieldName, Object... args) {
-        return getElements(fieldName, Checkbox.class, args);
+    public final List<Checkbox> getCheckboxes(String fieldName) {
+        return getElements(fieldName, Checkbox.class);
     }
 
     /**
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - A {@link Form} instance.
      */
-    public final Form getForm(String fieldName, Object... args) {
-        return getElement(fieldName, Form.class, args);
+    public final Form getForm(String fieldName) {
+        return getElement(fieldName, Form.class);
     }
 
     /**
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - A {@link List} of {@link Form} instances.
      */
-    public final List<Form> getForms(String fieldName, Object... args) {
-        return getElements(fieldName, Form.class, args);
+    public final List<Form> getForms(String fieldName) {
+        return getElements(fieldName, Form.class);
     }
 
     /**
@@ -107,8 +107,8 @@ public final class PageObject {
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - A {@link GenericElement} instance.
      */
-    public final GenericElement getGenericElement(String fieldName, Object... args) {
-        return getElement(fieldName, GenericElement.class, args);
+    public final GenericElement getGenericElement(String fieldName) {
+        return getElement(fieldName, GenericElement.class);
     }
 
     /**
@@ -119,24 +119,24 @@ public final class PageObject {
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - A {@link List} of {@link GenericElement} instances.
      */
-    public final List<GenericElement> getGenericElements(String fieldName, Object... args) {
-        return getElements(fieldName, GenericElement.class, args);
+    public final List<GenericElement> getGenericElements(String fieldName) {
+        return getElements(fieldName, GenericElement.class);
     }
 
     /**
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - An {@link Image} object.
      */
-    public final Image getImage(String fieldName, Object... args) {
-        return getElement(fieldName, Image.class, args);
+    public final Image getImage(String fieldName) {
+        return getElement(fieldName, Image.class);
     }
 
     /**
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - A {@link List} of {@link Image} instances.
      */
-    public final List<Image> getImages(String fieldName, Object... args) {
-        return getElements(fieldName, Image.class, args);
+    public final List<Image> getImages(String fieldName) {
+        return getElements(fieldName, Image.class);
     }
 
     /**
@@ -155,72 +155,72 @@ public final class PageObject {
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - A {@link List} of {@link Label} instances.
      */
-    public final List<Label> getLabels(String fieldName, Object... args) {
-        return getElements(fieldName, Label.class, args);
+    public final List<Label> getLabels(String fieldName) {
+        return getElements(fieldName, Label.class);
     }
 
     /**
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - A {@link Link} instance.
      */
-    public final Link getLink(String fieldName, Object... args) {
-        return getElement(fieldName, Link.class, args);
+    public final Link getLink(String fieldName) {
+        return getElement(fieldName, Link.class);
     }
 
     /**
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - A {@link List} of {@link Link} instances.
      */
-    public final List<Link> getLinks(String fieldName, Object... args) {
-        return getElements(fieldName, Link.class, args);
+    public final List<Link> getLinks(String fieldName) {
+        return getElements(fieldName, Link.class);
     }
 
     /**
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - A {@link RadioButton} instance.
      */
-    public final RadioButton getRadioButton(String fieldName, Object... args) {
-        return getElement(fieldName, RadioButton.class, args);
+    public final RadioButton getRadioButton(String fieldName) {
+        return getElement(fieldName, RadioButton.class);
     }
 
     /**
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - A {@link List} of {@link RadioButton} instances.
      */
-    public final List<RadioButton> getRadioButtons(String fieldName, Object... args) {
-        return getElements(fieldName, RadioButton.class, args);
+    public final List<RadioButton> getRadioButtons(String fieldName) {
+        return getElements(fieldName, RadioButton.class);
     }
 
     /**
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - A {@link SelectList} instance.
      */
-    public final SelectList getSelectList(String fieldName, Object... args) {
-        return getElement(fieldName, SelectList.class, args);
+    public final SelectList getSelectList(String fieldName) {
+        return getElement(fieldName, SelectList.class);
     }
 
     /**
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - A {@link List} of {@link SelectList} instances.
      */
-    public final List<SelectList> getSelectLists(String fieldName, Object... args) {
-        return getElements(fieldName, SelectList.class, args);
+    public final List<SelectList> getSelectLists(String fieldName) {
+        return getElements(fieldName, SelectList.class);
     }
 
     /**
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - A {@link TextField} instance.
      */
-    public final TextField getTextField(String fieldName, Object... args) {
-        return getElement(fieldName, TextField.class, args);
+    public final TextField getTextField(String fieldName) {
+        return getElement(fieldName, TextField.class);
     }
 
     /**
      * @param fieldName - The name of the field as defined in the JSON file.
      * @return - A {@link List} of {@link TextField} instances.
      */
-    public final List<TextField> getTextFields(String fieldName, Object... args) {
-        return getElements(fieldName, TextField.class, args);
+    public final List<TextField> getTextFields(String fieldName) {
+        return getElements(fieldName, TextField.class);
     }
 
     private String getLocale() {
