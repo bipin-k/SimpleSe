@@ -36,6 +36,19 @@
           "locator": "xpath=//a[text()='textField']"
         }
       ]
+    },
+    {
+      "name": "amazon",
+      "locale": [
+        {
+          "name": "en_US",
+          "locator": ".//a[@class = 'nav-a  '][%s]"
+        }
+      ],
+      "wait": {
+        "until": "visible",
+        "for": 10
+      }
     }
   ]
 }

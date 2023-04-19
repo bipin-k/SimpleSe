@@ -29,6 +29,9 @@ public class PageObjectTest {
     @Test
     public void testPageWithDifferentLocale() {
         WebDriver driver = new FakeDriver();
+
+        System.out.println(driver.getCurrentUrl());
+
         PageObject homePage = new PageObject(driver, "src/test/resources/HomePage.json").forLocale("en_FR");
         Label heading = homePage.getLabel("heading");
         Assert.assertEquals(heading.getText(), "Fake text");
@@ -93,5 +96,15 @@ public class PageObjectTest {
         String expected = Keys.chord(Keys.CONTROL, "a");
         textField.type(Keys.chord(Keys.CONTROL, "a"));
         Assert.assertEquals(textField.getText(), expected);
+    }
+
+    @Test
+    public void test1() {
+        WebDriver driver = new FakeDriver(2, DefaultWaitConditions.CLICKABLE);
+        PageObject homePage = new PageObject(driver, "src/test/resources/HomePage.json");
+        Label heading = homePage.getLabel("headingWithPlaceholderText", "id");
+        System.out.println(heading.getText());
+        System.out.println(homePage.getLabel("headingWithPlaceholderText", "id").toString());
+        Assert.assertEquals(heading.getText(), "Fake text");
     }
 }

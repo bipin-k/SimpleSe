@@ -28,6 +28,23 @@ public class LocaleDefinition {
         return definitions;
     }
 
+    static List<LocaleDefinition> newDefinition(List<Locale> locales, String fieldName, Object... args) {
+        List<LocaleDefinition> definitions = Lists.newArrayList();
+        locales.forEach(each -> {
+            each.validate();
+            LocaleDefinition definition = new LocaleDefinition();
+
+            String locator = each.getLocator();
+
+
+            StrategyTraits traits = Strategy.identifyStrategy(each.getLocator());
+            definition.locale = each.getName();
+            definition.locationStrategy = traits.getStrategy(each.getLocator());
+            definitions.add(definition);
+        });
+        return definitions;
+    }
+
     By getLocationStrategy() {
         return locationStrategy;
     }

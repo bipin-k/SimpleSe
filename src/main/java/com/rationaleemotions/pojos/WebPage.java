@@ -21,6 +21,29 @@ public final class WebPage {
         //Defeat instantiation.
     }
 
+    public static WebPage getPage(String fileName, String fieldName, Object... args) {
+        File file = new File(fileName);
+        Preconditions.checkArgument(file.exists(), "Cannot find file : " + file.getAbsolutePath());
+        WebPage page = PageStore.getPage(FilenameUtils.getBaseName(fileName));
+        if (page != null) {
+            return page;
+        }
+        try {
+            PageElement pageElement = PageParser.parsePage(fileName);
+            page = new WebPage();
+            page.name = pageElement.getName();
+            page.defaultLocale = pageElement.getDefaultLocale();
+            for (Element each : pageElement.getElements()) {
+                JsonWebElement element = JsonWebElement.newElement(each, page.defaultLocale, fieldName, args);
+                page.elements.put(element.getName(), element);
+            }
+            PageStore.addPage(page);
+        } catch (IOException e) {
+            throw new WebPageParsingException(e);
+        }
+        return page;
+    }
+
     public static WebPage getPage(String fileName) {
         File file = new File(fileName);
         Preconditions.checkArgument(file.exists(), "Cannot find file : " + file.getAbsolutePath());

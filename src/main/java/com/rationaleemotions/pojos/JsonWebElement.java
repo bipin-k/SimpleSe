@@ -3,6 +3,7 @@ package com.rationaleemotions.pojos;
 import com.google.common.collect.Maps;
 import com.rationaleemotions.internal.JvmArgs;
 import com.rationaleemotions.internal.parser.pojos.Element;
+import com.rationaleemotions.internal.parser.pojos.Locale;
 import com.rationaleemotions.internal.parser.pojos.Wait;
 import com.rationaleemotions.page.WebElementType;
 import com.rationaleemotions.utils.StringUtils;
@@ -42,7 +43,7 @@ public final class JsonWebElement {
     public By getLocationStrategy(String whichLocale) {
         checkArgument(StringUtils.isNotBlank(whichLocale), "Querying locale cannot be empty (or) null.");
         checkState(locationStrategy.containsKey(defaultLocale), "Un-recognized default locale [" + defaultLocale + "]"
-            + " provided.");
+                + " provided.");
         if (locationStrategy.containsKey(whichLocale)) {
             return locationStrategy.get(whichLocale);
         }
@@ -54,6 +55,34 @@ public final class JsonWebElement {
         JsonWebElement jsonWebElement = new JsonWebElement();
         jsonWebElement.name = element.getName();
         List<LocaleDefinition> definitions = LocaleDefinition.newDefinition(element.getLocales());
+        definitions.forEach(localeDefinition ->
+                jsonWebElement.locationStrategy.put(localeDefinition.getLocale(), localeDefinition.getLocationStrategy()));
+        jsonWebElement.defaultLocale = defaultLocale;
+        if (element.getWait() != null && element.getWait().isValid()) {
+            jsonWebElement.wait = element.getWait();
+        }
+        jsonWebElement.type = element.getType();
+        return jsonWebElement;
+    }
+
+    static JsonWebElement newElement(Element element, String defaultLocale, String fieldName, Object... args) {
+        element.validate();
+        JsonWebElement jsonWebElement = new JsonWebElement();
+        String name1 = element.getName();
+
+        List<Locale> locales = element.getLocales();
+        if (name1.equalsIgnoreCase(fieldName)) {
+            locales = element.getLocales();
+
+            for (Locale locale : element.getLocales()) {
+                locale.setLocator(String.format(locale.getLocator(), args));
+            }
+
+        }
+
+        jsonWebElement.name = name1;
+
+        List<LocaleDefinition> definitions = LocaleDefinition.newDefinition(locales, fieldName, args);
         definitions.forEach(localeDefinition ->
                 jsonWebElement.locationStrategy.put(localeDefinition.getLocale(), localeDefinition.getLocationStrategy()));
         jsonWebElement.defaultLocale = defaultLocale;
