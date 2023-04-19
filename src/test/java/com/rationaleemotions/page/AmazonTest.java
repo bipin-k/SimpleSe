@@ -26,10 +26,10 @@ public class AmazonTest {
 
 
 
-        TextField textField1 = homePage.getTextField("amazon");
+        Label textField1 = homePage.getLabel("amazon");
         System.out.println(textField1.getText());
 
-        TextField textField = homePage.getTextField("amazon1", 3);
+        Label textField = homePage.getLabel("amazon1", 3);
         System.out.println(textField.getText());
 
         try {

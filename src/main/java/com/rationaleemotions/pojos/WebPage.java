@@ -30,10 +30,17 @@ public final class WebPage {
         }
         try {
             PageElement pageElement = PageParser.parsePage(fileName);
+
             page = new WebPage();
             page.name = pageElement.getName();
             page.defaultLocale = pageElement.getDefaultLocale();
             for (Element each : pageElement.getElements()) {
+
+//                if (!fieldName.equalsIgnoreCase(each.getName())) {
+//                    return page;
+//                }
+
+
                 JsonWebElement element = JsonWebElement.newElement(each, page.defaultLocale, fieldName, args);
                 page.elements.put(element.getName(), element);
             }
