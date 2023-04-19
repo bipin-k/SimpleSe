@@ -16,6 +16,10 @@ public class Element {
   @Expose
   private String name;
 
+  @SerializedName("isDynamic")
+  @Expose
+  private boolean isDynamic;
+
   @SerializedName("type")
   @Expose
   private String type;
@@ -38,6 +42,10 @@ public class Element {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public boolean isDynamic() {
+    return isDynamic;
   }
 
   public WebElementType getType() {

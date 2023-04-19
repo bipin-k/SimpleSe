@@ -52,11 +52,11 @@
     },
     {
       "name": "amazon1",
+      "isDynamic": true,
       "locale": [
         {
           "name": "en_US",
-          "locator": ".//a[@class = 'nav-a  '][%s]",
-          "isDynamic": true
+          "locator": ".//a[@class = 'nav-a  '][%s]"
         }
       ],
       "wait": {

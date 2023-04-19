@@ -34,9 +34,6 @@ public class LocaleDefinition {
             each.validate();
             LocaleDefinition definition = new LocaleDefinition();
 
-            String locator = each.getLocator();
-
-
             StrategyTraits traits = Strategy.identifyStrategy(each.getLocator());
             definition.locale = each.getName();
             definition.locationStrategy = traits.getStrategy(each.getLocator());

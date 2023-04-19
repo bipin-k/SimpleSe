@@ -2,6 +2,7 @@ package com.rationaleemotions.page;
 
 import com.google.common.collect.Lists;
 import com.rationaleemotions.internal.locators.WaitCondition;
+import com.rationaleemotions.internal.parser.pojos.Locale;
 import com.rationaleemotions.internal.parser.pojos.Wait;
 import com.rationaleemotions.pojos.JsonWebElement;
 import com.rationaleemotions.pojos.WebPage;
@@ -229,6 +230,11 @@ public final class PageObject {
         return locale;
     }
 
+    private <E> E getElement(String fieldName, Class<E> clazz) {
+        WebElement webElement = newRawElement(getJsonWebElement(fieldName)).getWebElement();
+        return newInstance(clazz, webElement);
+    }
+
     private <E> E getElement(String fieldName, Class<E> clazz, Object... args) {
         WebElement webElement = newRawElement(getJsonWebElement(fieldName, args)).getWebElement();
         return newInstance(clazz, webElement);
@@ -256,11 +262,23 @@ public final class PageObject {
         }
     }
 
-    private JsonWebElement getJsonWebElement(String fieldName, Object... args) {
+    private void initLazily(String fieldName, Object... args) {
+//        if (page != null) {
+//            return;
+//        }
+//        synchronized (this) {
+//            if (page != null) {
+//                return;
+//            }
+            page = WebPage.getPage(jsonFileSource, fieldName, args);
+//        }
+    }
+
+    private JsonWebElement getJsonWebElement(String fieldName) {
         if (StringUtils.isBlank(fieldName)) {
             throw new IllegalArgumentException("A field name cannot be null (or) empty");
         }
-        initLazily(fieldName, args);
+        initLazily();
         JsonWebElement element = page.getWebElement(fieldName);
         if (element == null) {
             throw new IllegalArgumentException("Unable to locate element [" + fieldName +
@@ -269,19 +287,32 @@ public final class PageObject {
         return element;
     }
 
-    private void initLazily(String fieldName, Object... args) {
-        if (args.length > 0) {
-            page = null;
+    private JsonWebElement getJsonWebElement(String fieldName, Object... args) {
+        if (StringUtils.isBlank(fieldName)) {
+            throw new IllegalArgumentException("A field name cannot be null (or) empty");
         }
-        if (page != null) {
-            return;
-        }
-        synchronized (this) {
-            if (page != null) {
-                return;
+
+
+        initLazily(fieldName, args);
+        JsonWebElement element = page.getWebElement(fieldName);
+        if (element.isDynamic()) {
+            JsonWebElement webElement = page.getWebElement(fieldName);
+
+//            element.getLocationStrategy()
+
+            element.getLocales().forEach(System.out::println);
+
+            for (Locale locale1 : element.getLocales()) {
+                locale1.setLocator(String.format(locale1.getLocator(), args));
             }
-            page = WebPage.getPage(jsonFileSource, fieldName, args);
+
+
         }
+        if (element == null) {
+            throw new IllegalArgumentException("Unable to locate element [" + fieldName +
+                    "] in the file [" + this.jsonFileSource + "]");
+        }
+        return element;
     }
 
     private RawElement newRawElement(JsonWebElement element) {
