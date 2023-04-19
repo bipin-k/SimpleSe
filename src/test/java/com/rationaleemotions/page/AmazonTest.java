@@ -22,13 +22,11 @@ public class AmazonTest {
         driver.get("https://www.amazon.in/");
 
         PageObject homePage = new PageObject(driver, "src/test/resources/HomePage.json");
-        TextField textField = homePage.getTextField("amazon", 4);
+        TextField textField = homePage.getTextField("amazon", 6);
 
         System.out.println(textField.getText());
 
-//        String text = driver.findElement(By.xpath("")).getText();
-//        System.out.println(text);
-
+        driver.close();
         driver.quit();
     }
 }

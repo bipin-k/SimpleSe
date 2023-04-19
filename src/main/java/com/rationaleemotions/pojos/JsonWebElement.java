@@ -68,19 +68,15 @@ public final class JsonWebElement {
     static JsonWebElement newElement(Element element, String defaultLocale, String fieldName, Object... args) {
         element.validate();
         JsonWebElement jsonWebElement = new JsonWebElement();
-        String name1 = element.getName();
+        jsonWebElement.name = element.getName();
 
+        // Apply string formatting for the provided arguments on string placeholder
         List<Locale> locales = element.getLocales();
-        if (name1.equalsIgnoreCase(fieldName)) {
-            locales = element.getLocales();
-
+        if (jsonWebElement.name.equalsIgnoreCase(fieldName)) {
             for (Locale locale : element.getLocales()) {
                 locale.setLocator(String.format(locale.getLocator(), args));
             }
-
         }
-
-        jsonWebElement.name = name1;
 
         List<LocaleDefinition> definitions = LocaleDefinition.newDefinition(locales, fieldName, args);
         definitions.forEach(localeDefinition ->
